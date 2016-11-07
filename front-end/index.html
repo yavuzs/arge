@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <title>ARGE</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Evde internet yok şuan cdn den çekemem. burası lazım bana :D -->
+    <!--link rel="stylesheet" href="styles/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="styles/bootstrap/css/bootstrap-theme.css">
+    <script src="styles/bootstrap/js/bootstrap.js"></script-->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="/styles/index.css">
+
+    <!-- Load libraries -->
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
+    <script src="node_modules/systemjs/dist/system.src.js"></script>
+
+    <!-- Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
+    <script>
+      System.import('app').catch(function(err){ console.error(err); });
+    </script>
+  </head>
+  
+  <body>
+    <my-app>Loading...</my-app>
+  </body>
+</html>

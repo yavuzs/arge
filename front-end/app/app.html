@@ -1,4 +1,26 @@
-<ul>
-    <li>Ulli</li>
-    <li>{{variable}}</li>
-</ul>
+<div class="container container-table">
+    <div class="row vertical-center-row">
+        <div class="col-md-4 col-md-offset-4">
+            <form>
+                
+                <div class="form-group">
+                    <label for="uname">{{userNameStr}}</label>
+                    <input id="uname" placeholder="{{userNameStr}}" class="form-control" type="text" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="pass">{{passwordStr}}</label>
+                    <input id="pass" placeholder="{{passwordStr}}" class="form-control" type="password" />
+                </div>
+
+                <div class="form-group">
+                    <label for="email">{{emailStr}}</label>
+                    <input id="email" placeholder="{{emailStr}}" class="form-control" type="email" />
+                </div>
+
+                <input type="button" class="btn btn-primary" (click)="auth()" value="{{authStr}}" />
+                
+            </form>
+        </div>
+    <div>
+</div>

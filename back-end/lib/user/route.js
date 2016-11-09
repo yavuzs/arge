@@ -4,8 +4,8 @@ const express = require('express');
 const app = module.exports = express();
 
 // parses POST bodies.
-app.use(bodyParser.urlencoded( {extended: true} ));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded( {extended: true} ));
 
 var config = require('../config.map');
 var userDB = require('./db.interface');

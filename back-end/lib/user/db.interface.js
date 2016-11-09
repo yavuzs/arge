@@ -1,14 +1,10 @@
-// user = { username: bla, password: bla, created: bla, lastSeen: bla, admin: false }
-
-const MongoClient = require('mongodb').MongoClient;
-const express = require('express');
-const app = module.exports = express();
+const mongoClient = require('mongodb').MongoClient;
 
 var config = require('../config.map');
-
+var Q = require('q');
 var db ;
 
-MongoClient.connect(config.mongoUrl, function (err, database) {
+mongoClient.connect(config.mongoUrl, function (err, database) {
     if (err) {
         console.error(err);
         return ;
@@ -16,27 +12,73 @@ MongoClient.connect(config.mongoUrl, function (err, database) {
     db = database;
 });
 
-var getUserByName = function(name) {
-    return db.collection(config.userSchema).find(name);
+var findOne = function(query) {
+    var deferred = Q.defer();
+
+    db.collection(config.userSchema).findOne(query, function(err, result) {
+        deferred.resolve(result);
+    });
+
+    return deferred.promise;
 };
+
+var find = function(query) {
+    var deferred = Q.defer();
+
+    db.collection(config.userSchema).find(query).toArray(function(err, result) {
+        deferred.resolve(result);
+    })
+
+    return deferred.promise;
+}
+
+var save = function(user) {
+    db.collection(config.userSchema).save(user);
+}
 
 module.exports = {
     
     saveUser: function(user) {
-        db.collection(config.userSchema).save(user);
+        var deferred = Q.defer();
+
+        findOne({username: user.username}).then(function(result) {
+            if (result !== undefined && result !== null) {
+                deferred.resolve(false);
+            }
+            else {
+                save(user);
+                deferred.resolve(true);
+            }
+        });
+
+        return deferred.promise;
     },
 
-    logUserIn: function(user) {
-        if (getUserByName(user.username) !== undefined) {
-            return true;
-        }
+    logUserIn: function(username, password) {
+        var deferred = Q.defer();
+        var query = { username: username, password: password };
 
-        console.error(username + " is not registered.");
-        return false;
+        findOne(query).then(function(user) {
+            if (user !== undefined && user !== null) {
+                user.lastSeen = Date.now();
+                save(user);
+                deferred.resolve(true);
+            }
+            else
+                deferred.resolve(false);
+        });
+
+        return deferred.promise;
     },
 
-    getUserByName: function(name) {
-        return getUserByName(name);
+    getUserByName: function(username) {
+        var deferred = Q.defer();
+
+        findOne({username: username}).then(function(result) {
+            deferred.resolve(result);
+        });
+
+        return deferred.promise;
     }
 
 }

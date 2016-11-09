@@ -1,27 +1,45 @@
 const MongoClient = require('mongodb').MongoClient;
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = module.exports = express();
+
+// parses POST bodies.
+app.use(bodyParser.urlencoded( {extended: true} ));
+app.use(bodyParser.json());
 
 var config = require('../config.map');
 var userDB = require('./db.interface');
 
-app.get('/login/:username/:password', function(req, res) {
-    // TODO create a user
-    userDB.logUserIn({ user: req.params.username });
-    res.send('Naber ' + req.params.username);
+var createUser = function(username, password) {
+    var date = Date.now();
+
+    var user = {
+        username: username,
+        password: password,
+        created: date,
+        lastSeen: date,
+        isAdmin: false
+    };
+
+    return user;
+};
+
+app.post('/user/login', function(req, res) {
+    userDB.logUserIn(req.body.username, req.body.password).then(function(result) {
+        res.send(result);
+    });
 });
 
-app.get('/signup/:username/:password', function(req, res) {
-    
-    var user = {
-        username: req.params.username,
-        password: req.params.password,
-        created: Date.now(),
-        lastSeen: Date.now(),
-        isAdmin: false
-    }
+app.post('/user/signup', function(req, res) {
+    var user = createUser(req.body.username, req.body.password);
 
-    userDB.saveUser(user);
+    userDB.saveUser(user).then(function(result) {
+        res.send(result);
+    })
+});
 
-    res.send('Successfully registered.');
+app.get('/user/get', function(req, res) {
+    userDB.getUserByName(req.query.username).then(function(result) {
+        res.send(result);
+    })
 });

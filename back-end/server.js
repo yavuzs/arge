@@ -1,17 +1,13 @@
 const express = require('express');
-const MongoClient = require('mongodb').MongoClient;
-const bodyParser = require('body-parser');
+const mongoClient = require('mongodb').MongoClient;
 const app = express();
 
 var config = require('./lib/config.map');
 
-// parses POST bodies.
-app.use(bodyParser.urlencoded( {extended: true} ));
-
 // precedence matters!
 app.use(require('./lib/user/route'));
 
-MongoClient.connect(config.mongoUrl, function name(err, database) {
+mongoClient.connect(config.mongoUrl, function name(err, database) {
     if (err) {
         console.error(err)
     }
@@ -19,6 +15,7 @@ MongoClient.connect(config.mongoUrl, function name(err, database) {
         app.listen(2999, function name() {
             console.log("Listening on port 2999");
         });
+        //database.dropDatabase();
         database.close();
     }   
 });

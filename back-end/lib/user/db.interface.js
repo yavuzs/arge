@@ -1,4 +1,5 @@
 const mongoClient = require('mongodb').MongoClient;
+const crypto = require('crypto');
 
 var config = require('../config.map');
 var Q = require('q');
@@ -34,20 +35,51 @@ var find = function(query) {
 
 var save = function(user) {
     db.collection(config.userSchema).save(user);
-}
+};
+
+var computeHash = function(str, salt) {
+    return crypto.createHash('sha256').update(str + salt).digest('hex');
+};
+
+var createUser = function(username, password, email) {
+    var date = Date.now();
+    var salt = crypto.randomBytes(8).toString('hex');
+    
+    password = computeHash(password, salt);
+
+    var user = {
+        username: username,
+        password: password, // hashed password
+        salt: salt,
+        email: email,
+        created: date,
+        lastSeen: date,
+        isAdmin: false
+    };
+
+    return user;
+};
 
 module.exports = {
     
-    saveUser: function(user) {
+    saveUser: function(username, password, email) {
         var deferred = Q.defer();
-
-        findOne({username: user.username}).then(function(result) {
-            if (result !== undefined && result !== null) {
+        // TODO check email as well before saving user
+        findOne({username: username}).then(function(result) {
+            if (result !== null) {
                 deferred.resolve(false);
             }
             else {
-                save(user);
-                deferred.resolve(true);
+                findOne({email: email}).then(function(result) {
+                    if (result !== null) {
+                        deferred.resolve(false);
+                    }
+                    else {
+                        var user = createUser(username, password, email);
+                        save(user);
+                        deferred.resolve(true);
+                    }
+                });
             }
         });
 
@@ -56,10 +88,11 @@ module.exports = {
 
     logUserIn: function(username, password) {
         var deferred = Q.defer();
-        var query = { username: username, password: password };
-
+        var query = { username: username };
+        // TODO create a session token and return that to user
         findOne(query).then(function(user) {
-            if (user !== undefined && user !== null) {
+            if (user !== undefined && user !== null
+                && user.password === computeHash(password, user.salt)) {
                 user.lastSeen = Date.now();
                 save(user);
                 deferred.resolve(true);

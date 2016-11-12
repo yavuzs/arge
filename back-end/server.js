@@ -15,7 +15,7 @@ mongoClient.connect(config.mongoUrl, function name(err, database) {
         app.listen(2999, function name() {
             console.log("Listening on port 2999");
         });
-        database.dropDatabase();
+        //database.dropDatabase();
         database.close();
     }   
 });

@@ -11,18 +11,21 @@ var userDB = require('./db.interface');
 
 app.post('/user/login', function(req, res) {
     userDB.logUserIn(req.body.username, req.body.password).then(function(result) {
+        console.log("Login res: " + result);
         res.send(result);
     });
 });
 
 app.post('/user/signup', function(req, res) {
     userDB.saveUser(req.body.username, req.body.password, req.body.email).then(function(result) {
+        console.log("Signup res: " + result);
         res.send(result);
     })
 });
 
 app.get('/user/get', function(req, res) {
     userDB.getUserByName(req.query.username).then(function(result) {
+        console.log("Get res: " + result);
         res.send(result);
     })
 });

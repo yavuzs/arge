@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
 import { Http, Headers } from '@angular/http';
+import { Injectable } from '@angular/core';
 
 export const contentHeaders = new Headers();
 contentHeaders.append('Accept', 'application/json');
 contentHeaders.append('Content-Type', 'application/json');
 
-@Component({
-  selector: 'arge',
-  templateUrl: 'app/app.html'
-})
+@Injectable()
+export class MainpageService {
 
-export class AppComponent {}
+    constructor(private http: Http) {}
+
+    hello() {
+        console.log('Heellloooo madafakaaaaa');
+    }
+
+}

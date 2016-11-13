@@ -1,3 +1,15 @@
-.stylish {
-    background-color: #A510A5
+.footer {
+    background-color: #A58080;
+    text-align: center;
+    position: fixed; 
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+}
+
+.alert {
+    background-color: #A05050;
+    text-align: center;
+    height: 2%;
 }

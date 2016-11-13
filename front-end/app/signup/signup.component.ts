@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SignupService } from './signup.service';
@@ -9,7 +9,6 @@ import { SignupService } from './signup.service';
   providers: [SignupService]
 })
 
-@Injectable()
 export class SignupComponent {
     constructor(private signupService: SignupService,
         private router: Router) {}

@@ -1,1 +1,18 @@
+<!-- Navigation Bar -->
+<div class="container">
+    <div class="navbar navbar-default">
+        <p>Say hello to navbar bithcez</p>
+    </div>
+</div>
+
+<!-- Division for temporary alerts -->
+<div class="container">
+    <div *ngIf="errorStr !== ''" class="col-md-offset-4 col-md-4 alert">{{errorStr}}</div>
+</div>
+
 <router-outlet></router-outlet>
+
+<!-- Footer -->
+<div class="footer">
+    <p>Footer here</p>
+</div>

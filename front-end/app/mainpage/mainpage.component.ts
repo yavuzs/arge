@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { MainpageService } from './mainpage.service';
@@ -9,7 +9,6 @@ import { MainpageService } from './mainpage.service';
   providers: [MainpageService]
 })
 
-@Injectable()
 export class MainpageComponent {
     constructor(private mainpageService: MainpageService,
         private router: Router) {}

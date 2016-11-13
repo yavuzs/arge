@@ -1,7 +1,8 @@
-import { Component, Injectable } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { LoginService } from './login.service';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'arge',
@@ -9,10 +10,10 @@ import { LoginService } from './login.service';
   providers: [LoginService]
 })
 
-@Injectable()
 export class LoginComponent {
     constructor(private loginService: LoginService,
-        private router: Router) {}
+        private router: Router,
+        private sharedService: SharedService) {}
 
     // TODO *Str variables should be reloaded with their new values when user changes the language
     signUpStr : string = "Don't have an account? Click here to sign up."
@@ -26,7 +27,7 @@ export class LoginComponent {
                 this.router.navigateByUrl('arge');
             },
             (error) => {
-                console.log('Invalid credentials || network error');
+                this.sharedService.setError('Invalid credentials');
             });
     }
 

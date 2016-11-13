@@ -1,7 +1,7 @@
 .footer {
     background-color: #A58080;
     text-align: center;
-    position: fixed; 
+    position: absolute; 
     bottom: 0;
     left: 0;
     right: 0;
@@ -9,7 +9,7 @@
 }
 
 .alert {
-    background-color: #A05050;
+    color: #A05050;
     text-align: center;
     height: 2%;
 }

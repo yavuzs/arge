@@ -10,9 +10,12 @@
     <div *ngIf="errorStr !== ''" class="col-md-offset-4 col-md-4 alert">{{errorStr}}</div>
 </div>
 
-<router-outlet></router-outlet>
+<!-- Page-dependent content goes here -->
+<div class="container-fluid">
+    <router-outlet></router-outlet>
+</div>
 
 <!-- Footer -->
-<div class="footer">
+<div class="container footer">
     <p>Footer here</p>
 </div>

@@ -67,17 +67,17 @@ module.exports = {
         // TODO check email as well before saving user
         findOne({username: username}).then(function(result) {
             if (result !== null) {
-                deferred.resolve(false);
+                deferred.resolve({reason: 'Username is already taken :(', res: false});
             }
             else {
                 findOne({email: email}).then(function(result) {
                     if (result !== null) {
-                        deferred.resolve(false);
+                        deferred.resolve({reason: 'Email address is in use!', res: false});
                     }
                     else {
                         var user = createUser(username, password, email);
                         save(user);
-                        deferred.resolve(true);
+                        deferred.resolve({reason: '', res: true});
                     }
                 });
             }

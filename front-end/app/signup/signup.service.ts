@@ -18,12 +18,8 @@ export class SignupService {
         this.http.post('http://localhost:2999/user/signup', body, { headers: contentHeaders })
           .subscribe(
             response => {
-              var status = (response._body === 'true');
-
-              if (status)
-                resolve(true);
-              else
-                reject(false);
+              var data = JSON.parse(response._body)
+              resolve(data);
             },
             error => {
               reject(false);

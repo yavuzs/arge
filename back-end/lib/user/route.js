@@ -18,7 +18,7 @@ app.post('/user/login', function(req, res) {
 
 app.post('/user/signup', function(req, res) {
     userDB.saveUser(req.body.username, req.body.password, req.body.email).then(function(result) {
-        console.log("Signup res: " + result);
+        console.log(result);
         res.send(result);
     })
 });

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { SignupService } from './signup.service';
+import { SharedService } from '../shared/shared.service';
 
 @Component({
   selector: 'arge',
@@ -11,6 +12,7 @@ import { SignupService } from './signup.service';
 
 export class SignupComponent {
     constructor(private signupService: SignupService,
+        private sharedService: SharedService,
         private router: Router) {}
 
     // TODO *Str variables should be reloaded with their new values when user changes the language
@@ -21,14 +23,22 @@ export class SignupComponent {
     emailStr : string = "E-mail"
 
     save(username, password, password2, email) {
-        // TODO make sanity check
+        if (password !== password2) {
+            this.sharedService.setError('Passwords do not match!');
+            return ;
+        }
+
         this.signupService.save(username, password, email).then(
             (response) => {
-                this.router.navigateByUrl('login');
+                if (response.res === true)
+                    this.router.navigateByUrl('login');
+                else
+                    this.sharedService.setError(response.reason);
             },
             (error) => {
-                console.log(error);
-            });
+                this.sharedService.setError('Invalid credentials');
+            }
+        );
     }
 
     redirectToLogin() {

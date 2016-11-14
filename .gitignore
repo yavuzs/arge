@@ -2,3 +2,5 @@
 front-end/**/*.js
 back-end/node_modules/
 front-end/node_modules/
+!front-end/app/karma.conf.js
+!front-end/app/karma-test-shim.js

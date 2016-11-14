@@ -1,5 +1,9 @@
 # arge
 
+Currently, only purpose of this repo is to teach its programmers MEAN stack.
+
+# how to deploy
+
 Front-end and back-end are deployed separately.
 
 After pulling the repo:
@@ -16,4 +20,6 @@ node server.js<br/>
 
 Aaand back end will be running on localhost:2999
 
-Of course mongodb and express should be available for back-end to work.
+NOTES:
+    - mongodb and express should be available for back-end to work.
+    - x origin site requests should be allowed in order back-end and front-end to communicate.

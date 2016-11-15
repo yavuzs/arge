@@ -18,6 +18,8 @@ export class AppComponent {
 
   constructor(private sharedService: SharedService) {}
 
+
+
   errorStr: string
 
   subscription: Subscription
@@ -31,5 +33,4 @@ export class AppComponent {
   ngOnDestroy() {
     this.subscription.unsubscribe();
   }
-
 }

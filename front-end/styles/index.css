@@ -13,3 +13,7 @@
     text-align: center;
     height: 2%;
 }
+
+.pointer {
+    cursor : pointer;
+}

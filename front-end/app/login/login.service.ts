@@ -18,7 +18,7 @@ export class LoginService {
         this.http.post('http://localhost:2999/user/login', body, { headers: contentHeaders })
           .subscribe(
             response => {
-              var status = (response._body === 'true')
+              var status = (response.toString() === 'true')
 
               if (status)
                 resolve(true);

@@ -30,10 +30,10 @@ export class SignupComponent {
 
         this.signupService.save(username, password, email).then(
             (response) => {
-                if (response.res === true)
+                if (response === true)
                     this.router.navigateByUrl('login');
                 else
-                    this.sharedService.setError(response.reason);
+                    this.sharedService.setError(response);
             },
             (error) => {
                 this.sharedService.setError('Invalid credentials');

@@ -12,6 +12,7 @@ contentHeaders.append('Content-Type', 'application/json');
   selector: 'arge',
   templateUrl: 'app/app.html',
   providers: [ SharedService ]
+  
 })
 
 export class AppComponent {

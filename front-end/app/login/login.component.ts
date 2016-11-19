@@ -24,7 +24,7 @@ export class LoginComponent {
     auth(username, password) {
         this.loginService.auth(username, password).then(
             (response) => {
-                this.router.navigateByUrl('arge');
+                this.router.navigateByUrl('main');
             },
             (error) => {
                 this.sharedService.setError('Invalid credentials');

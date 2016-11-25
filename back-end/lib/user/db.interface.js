@@ -64,20 +64,20 @@ module.exports = {
     
     saveUser: function(username, password, email) {
         var deferred = Q.defer();
-        // TODO check email as well before saving user
+        
         findOne({username: username}).then(function(result) {
-            if (result !== null) {
-                deferred.resolve({reason: 'Username is already taken :(', res: false});
+            if (result !== null) { //{reason: 'Username is already taken :(', res: false}
+                deferred.resolve('Username is already taken :(');
             }
             else {
                 findOne({email: email}).then(function(result) {
                     if (result !== null) {
-                        deferred.resolve({reason: 'Email address is in use!', res: false});
+                        deferred.resolve('Email address is already in use');
                     }
                     else {
                         var user = createUser(username, password, email);
                         save(user);
-                        deferred.resolve({reason: '', res: true});
+                        deferred.resolve(true);
                     }
                 });
             }

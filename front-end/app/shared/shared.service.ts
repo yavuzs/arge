@@ -1,11 +1,7 @@
-import { Http, Headers } from '@angular/http';
+import { Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-export const contentHeaders = new Headers();
-contentHeaders.append('Accept', 'application/json');
-contentHeaders.append('Content-Type', 'application/json');
 
 /**
  * This class is added as a provider at AppComponent class.
@@ -22,18 +18,18 @@ export class SharedService {
 
     constructor(private http: Http) {}
 
-    errorStringSource = new BehaviorSubject<string>('');
+    messageSource = new BehaviorSubject<string>('');
 
-    errorString = this.errorStringSource.asObservable();
+    messageString = this.messageSource.asObservable();
 
-    setError(message) {
+    setMessage(message) {
         let timer = Observable.timer(3000);
 
-        this.errorStringSource.next(message);
+        this.messageSource.next(message);
         
         timer.subscribe(
             t => {
-                this.errorStringSource.next('');
+                this.messageSource.next('');
             }
         );
     }

@@ -18,11 +18,10 @@ export class SignupService {
         this.http.post('http://localhost:2999/user/signup', body, { headers: contentHeaders })
           .subscribe(
             response => {
-              var data = JSON.parse(response.toString())
-              resolve(data);
+              resolve(response['_body']);
             },
             error => {
-              reject(false);
+              reject(error);
             }
           );
       });

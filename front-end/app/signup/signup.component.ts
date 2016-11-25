@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 
 import { SignupService } from './signup.service';
 import { SharedService } from '../shared/shared.service';
@@ -24,19 +25,27 @@ export class SignupComponent {
 
     save(username, password, password2, email) {
         if (password !== password2) {
-            this.sharedService.setError('Passwords do not match!');
+            this.sharedService.setMessage('Passwords do not match!');
             return ;
         }
 
         this.signupService.save(username, password, email).then(
             (response) => {
-                if (response === true)
-                    this.router.navigateByUrl('login');
+                console.log(response);
+                if (response === 'true') {
+                    var timer = Observable.timer(3000);
+
+                    this.sharedService.setMessage('Thank you for your registration.');
+                    
+                    timer.subscribe(
+                        t => this.router.navigateByUrl('login')
+                    );
+                }
                 else
-                    this.sharedService.setError(response);
+                    this.sharedService.setMessage(response);
             },
             (error) => {
-                this.sharedService.setError('Invalid credentials');
+                this.sharedService.setMessage('Invalid credentials');
             }
         );
     }

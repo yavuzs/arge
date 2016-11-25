@@ -12,6 +12,7 @@ export class NavbarComponent implements OnInit {
   public menuItems: any[];
   public brandMenu: any;
   isCollapsed = true;
+  logoutStr:string = 'Logout';
 
   constructor() {}
 
@@ -22,6 +23,10 @@ export class NavbarComponent implements OnInit {
 
   public get menuIcon(): string {
     return this.isCollapsed ? '☰' : '✖';
+  }
+
+  logout() {
+    sessionStorage.removeItem('user');
   }
 
 }

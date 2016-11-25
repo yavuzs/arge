@@ -21,13 +21,20 @@ export class LoginComponent {
     passwordStr : string = "Password"
     authStr : string = "Login"
 
+    ngOnInit() {
+        if (sessionStorage.getItem('user') !== null) {
+            this.router.navigateByUrl('main');
+        }
+    }
+
     auth(username, password) {
         this.loginService.auth(username, password).then(
             (response) => {
+                sessionStorage.setItem('user', username);
                 this.router.navigateByUrl('main');
             },
             (error) => {
-                this.sharedService.setError('Invalid credentials');
+                this.sharedService.setMessage('Invalid credentials');
             });
     }
 

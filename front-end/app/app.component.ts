@@ -12,22 +12,19 @@ contentHeaders.append('Content-Type', 'application/json');
   selector: 'arge',
   templateUrl: 'app/app.html',
   providers: [ SharedService ]
-  
 })
 
 export class AppComponent {
 
   constructor(private sharedService: SharedService) {}
 
-
-
-  errorStr: string
+  messageStr: string
 
   subscription: Subscription
 
   ngOnInit() {
-    this.subscription = this.sharedService.errorStringSource.subscribe(
-      value => { this.errorStr = value; }
+    this.subscription = this.sharedService.messageSource.subscribe(
+      value => { this.messageStr = value; }
     );
   }
 

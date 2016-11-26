@@ -23,9 +23,8 @@
                         type="email" #email />
                 </div>
 
-                <input type="button" class="btn btn-primary" 
+                <input type="button" class="btn btn-primary" style="float:right"
                     (click)="save(username.value, password.value, password2.value, email.value)" value="{{signupStr}}" />
-                <a class = "pointer" (click)="redirectToLogin()">{{loginStr}}</a>
             </form>
         </div>
     <div>

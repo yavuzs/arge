@@ -1,5 +1,7 @@
 export enum MenuType {
-  BRAND
+  BRAND,
+  LOGIN,
+  LOGOUT
 }
 
 export interface RouteInfo {

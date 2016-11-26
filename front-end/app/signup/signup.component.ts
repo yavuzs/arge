@@ -17,7 +17,6 @@ export class SignupComponent {
         private router: Router) {}
 
     // TODO *Str variables should be reloaded with their new values when user changes the language
-    loginStr : string = "Already have an account? Click here to login."
     userNameStr : string = "Username"
     passwordStr : string = "Password"
     signupStr : string = "Signup"
@@ -48,9 +47,5 @@ export class SignupComponent {
                 this.sharedService.setMessage('Invalid credentials');
             }
         );
-    }
-
-    redirectToLogin() {
-        this.router.navigateByUrl('login');
     }
 }

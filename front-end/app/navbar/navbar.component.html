@@ -1,8 +1,33 @@
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <a (click)="isCollapsed = true" class="navbar-brand hidden-sm-up" [routerLink]="[brandMenu.path]">
-      {{brandMenu.title}}
-    </a>
-    <a (click)="logout()" class="pointer hidden-sm-up" style="float:right">Logout</a>
+    <div class = "row">
+      <a (click)="isCollapsed = true" class="navbar-brand hidden-sm-up" [routerLink]="[brandMenu.path]">
+          {{brandMenu.title}}
+        </a>
+        <a *ngIf="isLoggedin" (click)="logout()" class="pointer hidden-sm-up" style="float:right">Logout</a>
+        <div *ngIf="!isLoggedin" class="pointer hidden-sm-up" style="float:right">
+
+          <div class = "col-lg-12  loginForm" >
+             <div class = "col-lg-4">
+                <input placeholder="{{userNameStr}}" class="form-control" id = "login"
+                                  type="text" #username />
+            </div> 
+              
+            <div class = "col-lg-4"> 
+                 <input placeholder="{{passwordStr}}" class="form-control" id = "login"
+                                  type="password" #password />
+
+            </div>
+
+            <div class = "col-lg-4">
+
+                <input type="button" class="btn btn-primary" (click)="auth(username.value, password.value)" value="{{authStr}}" id = "loginButton"/>
+
+            </div>
+            
+          </div>
+
+        </div>
+    </div>
   </div>
 </nav>

@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { Http, Headers } from '@angular/http';
 import { Subscription } from 'rxjs/Subscription';
 
 import { SharedService } from './shared/shared.service';
-
-export const contentHeaders = new Headers();
-contentHeaders.append('Accept', 'application/json');
-contentHeaders.append('Content-Type', 'application/json');
 
 @Component({
   selector: 'arge',

@@ -13,16 +13,25 @@ import { SharedService } from '../shared/shared.service';
   providers: [ LoginService ]
 })
 export class NavbarComponent implements OnInit {
-  public menuItems: any[];
-  public brandMenu: any;
-  isCollapsed = true;
-  logoutStr:string = 'Logout';
-  userNameStr : string = "Username"
-  passwordStr : string = "Password"
-  authStr : string = "Login"
-  isLoggedin:boolean = sessionStorage.getItem('user') !== null;
 
-  constructor(private loginService: LoginService ,private sharedService: SharedService) {}
+  public menuItems: any[];
+
+  public brandMenu: any;
+
+  isCollapsed: boolean = true;
+
+  logoutStr: string = 'Logout';
+
+  userNameStr: string = "Username"
+
+  passwordStr: string = "Password"
+
+  authStr: string = "Login"
+
+  isLoggedin: boolean = sessionStorage.getItem('user') !== null;
+
+  constructor(private loginService: LoginService ,
+              private sharedService: SharedService) {}
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);
@@ -33,7 +42,7 @@ export class NavbarComponent implements OnInit {
     return this.isCollapsed ? '☰' : '✖';
   }
 
-  auth(username, password) {
+  login(username, password) {
         this.loginService.auth(username, password).then(
             (response) => {
                 sessionStorage.setItem('user', username);

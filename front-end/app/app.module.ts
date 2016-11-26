@@ -21,10 +21,9 @@ class CustomRequestOptions extends BaseRequestOptions {
 @NgModule({
   imports:      [ BrowserModule, HttpModule,
     RouterModule.forRoot([
-      { path: '',      component: MainpageComponent },
-      { path: 'main', component: MainpageComponent },
-      { path: 'signup', component: SignupComponent },
-      { path: 'navbar', component: NavbarComponent }
+      { path: '',       component: MainpageComponent },
+      { path: 'main',   component: MainpageComponent },
+      { path: 'signup', component: SignupComponent }
     ]) 
   ],
   declarations: [ AppComponent, SignupComponent, MainpageComponent , NavbarComponent],

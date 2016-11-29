@@ -6,6 +6,7 @@ import { SharedService } from './shared/shared.service';
 @Component({
   selector: 'arge',
   templateUrl: 'app/app.html',
+  styleUrls: [ 'app/app.css' ],
   providers: [ SharedService ]
 })
 

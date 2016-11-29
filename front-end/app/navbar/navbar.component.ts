@@ -9,7 +9,7 @@ import { SharedService } from '../shared/shared.service';
 //  moduleId: module.id,
   selector: 'navbar',
   templateUrl: 'app/navbar/navbar.component.html',
-  styleUrls: [ 'app/navbar/navbar.component.scss' ],
+  styleUrls: [ 'app/navbar/navbar.component.css' ],
   providers: [ LoginService ]
 })
 export class NavbarComponent implements OnInit {

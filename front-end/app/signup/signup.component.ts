@@ -30,14 +30,13 @@ export class SignupComponent {
 
         this.signupService.save(username, password, email).then(
             (response) => {
-                console.log(response);
                 if (response === 'true') {
                     var timer = Observable.timer(3000);
 
                     this.sharedService.setMessage('Thank you for your registration.');
                     
                     timer.subscribe(
-                        t => this.router.navigateByUrl('login')
+                        t => this.router.navigateByUrl('main')
                     );
                 }
                 else

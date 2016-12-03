@@ -3,3 +3,4 @@ back-end/node_modules/
 front-end/node_modules/
 !front-end/karma.conf.js
 !front-end/karma-test-shim.js
+db/

@@ -1,8 +1,8 @@
-var config = require('./lib/config.map');
-
 const express = require('express');
 const mongoClient = require('mongodb').MongoClient;
 const app = express();
+
+var config = require('./lib/config.map');
 
 // precedence matters!
 app.use(require('./lib/user/route'));

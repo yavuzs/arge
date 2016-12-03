@@ -1,0 +1,21 @@
+version: '2'
+services:
+  backend:
+   image: erolg/arge-be
+   ports:
+   - "3000:3000"
+   volumes:
+   - ./back-end/:/usr/src/app
+   links:
+   - mongo
+  mongo:
+   image: mongo
+   ports:
+   - '27017:27017'
+  frontend:
+   image: erolg/arge-fe
+   ports:
+   - "3001:3001"
+   - "8080:3000"
+   volumes:
+   - ./front-end/:/usr/src/app

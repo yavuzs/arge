@@ -15,7 +15,7 @@ export class SignupService {
       return new Promise((resolve, reject) => {
         let body = { username: username, password: password, email: email };
       
-        this.http.post('http://localhost:2999/user/signup', body, { headers: contentHeaders })
+        this.http.post('http://localhost:3000/user/signup', body, { headers: contentHeaders })
           .subscribe(
             response => {
               resolve(response['_body']);

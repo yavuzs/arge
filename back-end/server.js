@@ -1,11 +1,16 @@
-const express = require('express');
 const mongoClient = require('mongodb').MongoClient;
-const app = express();
+const bodyParser = require('body-parser');
+const express = require('express');
+const app = module.exports = express();
+
+// parses POST bodies.
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded( {extended: true} ));
+
+// routers
+app.use('/user', require('./lib/user/route'));
 
 var config = require('./lib/config.map');
-
-// precedence matters!
-app.use(require('./lib/user/route'));
 
 mongoClient.connect(config.mongoUrl, function (err, database) {
     if (err) {
@@ -17,4 +22,10 @@ mongoClient.connect(config.mongoUrl, function (err, database) {
         });
         database.close();
     }   
+});
+
+app.use('/', function(req, res, next) {
+    // no router handled the request, so this is an invalid one
+    console.log('Invalid req: ' + req['url'] + ' (' + req['method'] + ')');
+    res.status(404).send();
 });

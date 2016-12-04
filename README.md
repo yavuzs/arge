@@ -21,5 +21,10 @@ And front end will start on localhost:3000
 Aaand back end will be running on localhost:2999
 
 # dev notes
+* if you have docker and docker-compose, you don't need anything to run. execute `docker-compose up` and go to localhost:8080
+
+otherwise;
+
+
 * mongodb and express should be available for back-end to work.
 * x origin site requests should be allowed in order for back-end and front-end to communicate.

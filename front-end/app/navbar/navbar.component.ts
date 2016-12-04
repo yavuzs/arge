@@ -6,7 +6,6 @@ import { LoginService } from './login.service';
 import { SharedService } from '../shared/shared.service';
 
 @Component({
-//  moduleId: module.id,
   selector: 'navbar',
   templateUrl: 'app/navbar/navbar.component.html',
   styleUrls: [ 'app/navbar/navbar.component.css' ],
@@ -30,8 +29,8 @@ export class NavbarComponent implements OnInit {
 
   isLoggedin: boolean = sessionStorage.getItem('user') !== null;
 
-  constructor(private loginService: LoginService ,
-              private sharedService: SharedService) {}
+  constructor(private loginService : LoginService,
+            private sharedService : SharedService) {}
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem.menuType !== MenuType.BRAND);

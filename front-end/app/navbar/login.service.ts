@@ -11,7 +11,7 @@ export class LoginService {
       return new Promise((resolve, reject) => {
         let body = { username: username, password: password };
       
-        this.http.post('http://localhost:2999/user/login', body)
+        this.http.post('http://localhost:3000/user/login', body)
           .subscribe(
             response => {
               var status = (response['_body'] === 'true')
